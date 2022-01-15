@@ -1,6 +1,6 @@
 # Project description
-This is a collection of python scripts I wrote to help streamline 
-and automate IT-related tasks for a film festival I have been working with since 2017.
+This is a collection of Python scripts I wrote to help streamline 
+and automate IT-related tasks for a film festival I have been working with in recent years.
 
 Besides the time-saving aspect of automating a significant amount of menial 
 and repetetive work, a major benefit of solving these tasks in code
@@ -10,7 +10,7 @@ information from one place to another (especially critical when it comes to show
 films and events, mandatory age limits and other information that is displayed in many 
 contexts throughout the festival).
 
-Most data is entered into, manipulated, stored and retrieved 
+For this particular festival, most data is entered into, manipulated, stored and retrieved 
 from a number of [notion](https://www.notion.so)-databases in the runup to the event, while 
 the live festival relies on the [eventive](https://www.eventive.org) platform for its public-facing 
 schedule, ticketing system and the streaming of films.
@@ -21,7 +21,26 @@ tasks, such as exporting film texts and images for use in the festival catalog, 
 personal schedules for festival guests or creating the necessary files for large batch print jobs.
 
 More detailed information about the individual scripts and their operation 
-can be found in their respective docstrings, as well as in the following overview.
+can be found in their respective docstrings, as well as in the overview on the bottom of this page.
+
+# Getting started
+Since these scripts are custom-written for a particular festival, virtually none of them will be ready to use
+"out of the box". They do however offer solutions to a somewhat significant number of tasks that most seasoned festival
+workers will be familiar with. Equipped with some curiousity and basic knowledge of Python, you might find they can serve
+as a point of departure or inspiration for your own festival-related coding journey.
+
+
+Should you for whatever reason wish to more or less directly recreate some of the solutions proposed here, the following information
+about my configuration might save you some frustration:
+- working API keys for my notion and eventive account are placed in modules/secrets.py.
+- notion database ids and corresponding names are specified in modules/notion.py.
+- names and types of properties in notion databases will have to match those used in the scripts 
+or be adjusted accordingly.
+- some scripts depend on the existence of template files referenced in the code. In most cases, a blank file
+of the appropriate format should do to get you started.
+- required third-party packages can be obtained using `pip install`:
+[openpyxl](https://foss.heptapod.net/openpyxl/openpyxl),
+[python-docx](https://python-docx.readthedocs.io/en/latest/)
 
 # Scripts/files overview
 
@@ -104,3 +123,4 @@ converts foreign currencies, saves receipts with appropriate filenames and gener
 
 ## "6_Extras"
 A loose collection of scripts not easily classified, in development or written to solve smaller ad-hoc tasks.
+
