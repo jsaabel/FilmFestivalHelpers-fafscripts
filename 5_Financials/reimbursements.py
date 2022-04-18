@@ -42,27 +42,27 @@ line += 1
 # BLANK LINE
 line += 1
 # THREE LINES W/ P. ADDRESS (c6)
-sheet.cell(line, 6).value = 'Jonas Saabel'
+sheet.cell(line, 6).value = '...'
 line += 1
-sheet.cell(line, 6).value = 'Dynekilgata 19B'
+sheet.cell(line, 6).value = '...'
 line += 1
-sheet.cell(line, 6).value = '0569 Oslo'
+sheet.cell(line, 6).value = '...'
 line += 1
 # BLANK LINE
 line += 1
-# 4 LINES ADDRESS FAF (c1)
-sheet.cell(line, 1).value = 'Fredrikstad Animation Festival'
+# 4 LINES ADDRESS(c1)
+sheet.cell(line, 1).value = '...'
 line += 1
-sheet.cell(line, 1).value = 'c/o Norsk Animasjonsforum'
+sheet.cell(line, 1).value = '...'
 line += 1
-sheet.cell(line, 1).value = 'Nygaardsgata 33A'
+sheet.cell(line, 1).value = '...'
 line += 1
-sheet.cell(line, 1).value = '1606 Fredrikstad'
+sheet.cell(line, 1).value = '...'
 line += 1
 # BLANK LINE
 line += 1
 # Title (c1) add info on currency exchange rate (w/ date) (c4)
-sheet.cell(line, 1).value = 'Expenses in conjunction with FAF 2021'
+sheet.cell(line, 1).value = 'Expenses in conjunction with ...'
 sheet.cell(line, 4).value = f'1€={euros_to_nok} NOK, 1$={dollars_to_nok} NOK (as of {today})'
 line += 1
 # TWO BLANK LINES
@@ -126,11 +126,11 @@ line += 1
 line+= 1
 # LINE W/ NAME, F-NUMBER
 sheet.cell(line, 1).value = 'Payable to:'
-sheet.cell(line, 3).value = 'Jonas Saabel'
-sheet.cell(line, 4).value = '13108830179'
+sheet.cell(line, 3).value = ''
+sheet.cell(line, 4).value = ''
 line += 1
 # LINE W/ ACCOUNT NUMBER
-sheet.cell(line, 3).value = 'Konto 1210.10.32394'
+sheet.cell(line, 3).value = '
 
 # SAVE SPREADSHEET
 wb.save('reimbursements.xlsx')
