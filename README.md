@@ -1,4 +1,6 @@
 # Project description
+> :warning: **The code in this repo has been superseded**: I have been working on incorporating more fully developed versions of the scripts published here (and more) into a web / Flask-based solution, significantly improving the usability for non-technical users. That project's code base is not currently public, but please feel free to get in touch with me through [LinkedIn](https://www.linkedin.com/in/jonas-saabel/) if you are interested.  
+
 This is a collection of Python scripts I wrote to help streamline 
 and automate IT-related tasks for a film festival I have been working with in recent years.
 
