@@ -1,0 +1,17 @@
+{% extends 'script_detail.html' %} {% block description %} This script creates
+an overview of hotel rooms that are planned/needed in both excel and word format
+and uploads these files to Dropbox. It also counts the total number of rooms
+needed for every day. If a new <em>type</em> of room was recently added to
+Notion or the script fails to match a guest to their id, you may need to update
+the
+<a href="{{ url_for('main.rebuild_model', model_name='Room') }}">'Rooms'</a>
+and / or
+<a href="{{ url_for('main.rebuild_model', model_name='Guest') }}">'Guests'</a>
+internal databases. NB: A possible reason for this script crashing is a person
+or their room mate being assigned a room but not a guest category on Notion. {%
+endblock description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

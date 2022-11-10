@@ -1,0 +1,21 @@
+{% extends 'script_detail.html' %} {% block description %} Since Norwegian
+translations cannot be added to WordPress automatically due to API contraints,
+this script is intended to make the process of copying-and-pasting information
+from the database quicker and somewhat less annoying.
+<br />
+The generated document(s) feature links to the correct WordPress page. When
+logged in to WordPress, you can click the "Edit" button on top, and add a
+translation as usual. From there, you can click the "Text" button in the editor,
+and paste the raw html from the document. This way, all formatting should be
+applied correctly, and events will also feature a button/link to the event on
+Eventive.
+<br />
+Note that this script will only create documents for events/guests that have a
+WordPress entry already created. When doing this through the database explorer,
+the WordPress link will automatically be written to Notion, otherwise you have
+to add it manually. {% endblock description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

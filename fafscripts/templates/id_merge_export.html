@@ -1,0 +1,15 @@
+{% extends 'script_detail.html' %} {% block description %} This script generates
+an InDesign data merge file containing various information for the chosen
+programme and sequence and uploads it to Dropbox. It can be used in conjunction
+with the <a href="{{ url_for('scripts.img_export') }}">image export script</a>,
+when creating title screens and so on. The list of available programmes can be
+<a href="{{ url_for('main.rebuild_model', model_name='FilmProgramme') }}">
+  updated
+</a>
+if needed. {% endblock description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.programme.label(class="form-label") }} {{
+  form.programme(class="form-select") }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

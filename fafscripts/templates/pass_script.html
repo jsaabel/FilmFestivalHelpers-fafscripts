@@ -1,0 +1,19 @@
+{% extends 'script_detail.html' %}
+{% block description %}
+This script takes a link to a pass (in the form <em>"https://admin.eventive.org/event_buckets/.../people/...?highlight_pass=...")</em>
+as input, generates a pdf for that particular pass, and uploads it to Dropbox. Which template gets used
+for a particular pass bucket, and other related settings can be configured on 
+<a href="https://www.notion.so/Config-e94924f765f943b4bbfceaa53ea092a0" target="_blank">Notion</a>.
+If changes were made to the configuration, you might want to update the "Pass buckets" internal database and/or click the 
+"Update pass templates" button under 
+<a href={{ url_for("main.config")}}>Config</a>.
+{% endblock description %}
+{% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }}
+  {{ form.link.label(class="form-label") }}
+  {{ form.link(class="form-control") }}
+  <br>
+  {{ form.submit(class="btn btn-success") }}
+{% endblock options %}
+

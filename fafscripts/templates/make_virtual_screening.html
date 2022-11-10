@@ -1,0 +1,33 @@
+{% extends 'script_detail.html' %} {% block description %} This script lets you
+select multiple film programmes (you probably don't want to pick more than two),
+and does its best to create a virtual screening from those: <br />It retrieves
+the eventive ids for the films in the programme(s) (skipping films that don't
+have 'digital approval' set), adds the correct tags, sets balloting status, adds
+a virtual ticket bucket, and applies your choice of geographic restrictions.
+Furthermore, it uses a related "template event" (which has to be assigned on the
+<a
+  href="https://www.notion.so/Config-e94924f765f943b4bbfceaa53ea092a0#cdbc80983e0949b6be066d7b14ea7325"
+  target="_blank"
+>
+  config site
+</a>
+on Notion), to set the description text and age limit.
+<br />Make sure things are configured right on Notion, update the related
+internal databasees under
+<a href="{{ url_for('main.config')}}"> Config </a>
+on this site if necessary, and remember to make necessary adjustments (e.g. to
+the programme title and description) on Eventive before making the created
+screening publically visible. {% endblock description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.programmes.label(class="form-label") }}
+  <br />
+  {{ form.programmes(size=10, multiple=True, class="form-select") }}
+  <br />
+  {{ form.geo_blocking.label(class="form-label") }} {{
+  form.geo_blocking(class="form-select") }}
+  <br />
+  {{ form.submit(class="btn btn-success") }}
+  <br />
+</form>
+
+{% endblock options %}

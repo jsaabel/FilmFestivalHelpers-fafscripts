@@ -1,0 +1,317 @@
+{% extends "layout.html" %} {% block description %} Keep up with the latest
+changes and improvements by checking this site regularly :> {% endblock
+description %} {% block content %}
+
+<div class="content-section">
+  <h2>22-10-15: Behind-the-scenes updates and improvements</h2>
+  <ul>
+    <li>
+      The Reimbursements script is back to retrieving live currency rates.
+    </li>
+    <li>
+      The tech sheets script will no longer crash if no exact end time is
+      specified for an event.
+    </li>
+    <li>
+      Data retrieved from relation properties is no longer capped to a maximum
+      of 25 relations.
+    </li>
+    <li>Various minor tweaks and fixes.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-10-12: Tech sheets</h2>
+  <ul>
+    <li>Added a script that generates tech sheets/schedules.</li>
+    <li>Minor formatting fix for Volunteer schedule script.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-10-10: Volunteer schedules</h2>
+  <ul>
+    <li>Added a script that generates schedules for Volunteers.</li>
+    <li>The Reimbursements script will now skip 'paid' items.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-10-04: Maintenance update: More robust scripts.</h2>
+  <ul>
+    <li>
+      The hotel list and schedule export scripts have been improved to handle
+      omissions in the Notion databases more gracefully, throwing error messages
+      rather than crashing altogether.
+    </li>
+    <li>
+      Added some more instructions/things to look out for on a number of
+      scripts.
+    </li>
+    <li>Various other tweaks and fixes.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>
+    22-10-02: HTML export for Norwegian translations, better WordPress export,
+    issuing passes and more.
+  </h2>
+  <ul>
+    <li>Added a script that exports raw html of Norwegian translations.</li>
+    <li>
+      Pushing events to WordPress will now add a button that links to the
+      event's Eventive site.
+    </li>
+    <li>Added the ability to issue a free pass from a guest page.</li>
+    <li>Pushing feature film screenings should not work as intended.</li>
+    <li>Various smaller tweaks and fixes.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-09-25: Virtual screenings, bug fixes and more.</h2>
+  <ul>
+    <li>
+      Making virtual film screenings should now work as intended and is no
+      longer considered 'experimental'.
+    </li>
+    <li>Pushing films to Eventive will now also set a poster image.</li>
+    <li>
+      Various fixes to catalogue export implemented in past, unannounced
+      updates.
+    </li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-09-18: Updated hotel list script.</h2>
+  <ul>
+    <li>
+      Changed/updated configuration for excel spreadsheet exported through hotel
+      list script according to the hotel's wishes.
+    </li>
+    <li>Various misc. fixes.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-09-15: More updates to catalogue script.</h2>
+  <ul>
+    <li>
+      Introduced ability to only export certain short film programmes. Note that
+      this will still export introductory texts for other programmes for now.
+    </li>
+    <li>
+      Logo script will now (correctly) export ALL logos for a given supporter
+      into a subfolder.
+    </li>
+    <li>Various minor tweaks.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-09-13: Update to catalogue script.</h2>
+  <ul>
+    <li>
+      Introductionary texts for film programmes will now be retrieved from the
+      first related event, if data source in the Catalogue db is set to 'txt
+      from event'.
+    </li>
+    <li>
+      Fixed a bug that would cause only a single info line to show up on
+      exported document, despite multiple events being assigned.
+    </li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>
+    22-09-11: Pushing events to Eventive, statistics script, experimental
+    scripts.
+  </h2>
+  <ul>
+    <li>
+      Events can now be pushed to Eventive from their respective site, provided
+      the database analyzer finds no 'errors' (messages in red). Please note
+      that this could not be thoroughly tested because of incomplete databases
+      etc, so always check whether everything worked as intended by reviewing
+      the event on Eventive after it has been created.
+    </li>
+    <li>
+      Similarly, a button will show up to let you create a virtual event for
+      live-streamed events. Again, this is intended as a point of departure and
+      should be checked for correctness.
+    </li>
+    <li>
+      Added a 'stats' script, which writes relevant statistics about various
+      metrics to Notion and lets you track those over time.
+    </li>
+    <li>
+      Added an 'experimental' section for untested scripts. First off is a
+      script that (hopefully..) will help you create virtual screenings.
+    </li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-09-04: Pass export, pushing events to WordPress and more.</h2>
+  <ul>
+    <li>
+      Added scripts to export pass images (both individual and batch export).
+    </li>
+    <li>
+      The catalogue export script now allows to export texts/images separately.
+    </li>
+    <li>
+      Events can now be pushed to WordPress Note that this is limited to name,
+      text and image due to API restraints, so some manual work will still have
+      to be done after having pushed an event.
+    </li>
+    <li>
+      Films that have 'digital approval' property checked will have this
+      reflected on their catalogue page.
+    </li>
+    <li>'School' property will now appear on exported catalogue pages.</li>
+    <li>
+      ALLCAPS in properties will no longer prevent films from being pushed to
+      Eventive.
+    </li>
+    <li>
+      Fixed a bug that would cause guest pages to crash if a phone number was
+      assigned.
+    </li>
+    <li>
+      Fixed a bug that would cause schedule export script to crash if incomplete
+      travel information was provided.
+    </li>
+    <li>Various visual tweaks and bug fixes.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>
+    22-08-28: Pushing to Eventive and WordPress, new config section and more.
+  </h2>
+  <ul>
+    <li>
+      Added a "Config" page that lets you update all relevant internal
+      databases. NB that this goes hand in hand with a small number of tweaks
+      that have been made to how the Notion databases should be operated. More
+      on this in person.
+    </li>
+    <li>
+      Films can now be pushed to Eventive. If no major issues with the database
+      entry are found, a button will appear on the film's page.
+    </li>
+    <li>
+      Guest biographies can be pushed to WordPress from a guest page. Note that
+      the Norwegian translation will have to be added manually.
+    </li>
+    <li>Re-enabled the Catalogue export script.</li>
+    <li>Various visual tweaks and bug fixes.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-08-17: Code improvements, more checks and improved database views.</h2>
+  <ul>
+    <li>Various code improvements that will facilitate future development.</li>
+    <li>Small tweaks to database analyzer.</li>
+    <li>More information in database explorer.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>
+    22-08-08: Introducing database explorer, design tweaks, https and more.
+  </h2>
+  <ul>
+    <li>
+      The new "database explorer" offers a more convenient infrasctructure to
+      find relevant information on films, guests and events. It gives easy
+      access to relevant scripts and is fully integrated with the database
+      analyzer.
+    </li>
+    <li>
+      When viewing a guest in the database explorer, you can now preview the
+      guest's schedule before exporting the Word file (the button for this
+      function will only be shown if the guests has been assigned at least one
+      event).
+    </li>
+    <li>
+      The site has been given an updated look and should work better on mobile
+      devices.
+    </li>
+    <li>
+      Traffic to and from the site is now https encrypted, bolstering security
+      aspects and making the site reachable at www.fafscripts.com. All sub-sites
+      are reachable for logged-in users only.
+    </li>
+    <li>Added some more instructive/informational text.</li>
+    <li>Various bug fixes and under-the-hood improvements.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>
+    22-08-04: Transition to 2022 databases, major updates to database analyzer.
+  </h2>
+  <ul>
+    <li>All scripts will now use the 2022 databases!</li>
+    <li>Added 'Events' and 'Catalog' options to database analyzer.</li>
+    <li>
+      Clicking a message under 'Results' in the database analyzer will now take
+      you to the respective notion page.
+    </li>
+    <li>Fixed a bug that could crash catalogue export.</li>
+    <li>Various minor improvements to logging functionality.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-08-03: Guest database analyzer.</h2>
+  <ul>
+    <li>
+      Running the 'database analyzer' on the 'Guests' database is now possible.
+      For now, the automatic checks that are performed focus mainly on logic
+      around dates and times for travel and assigned events.
+    </li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-08-01: Reimbursements and better feedback.</h2>
+  <ul>
+    <li>New script available: Reimbursements/receipts export.</li>
+    <li>More detailed feedback in case of errors/crashes.</li>
+  </ul>
+</div>
+
+<div class="content-section">
+  <h2>22-07-28: First deployment.</h2>
+  <ul>
+    <li>Added Changelog site.</li>
+  </ul>
+</div>
+
+{% endblock content %} {% block sidebar %}
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>🔮 Coming soon</h3>
+    <p class="text-muted">
+      Typically, updates that introduce major new functionality will be followed
+      by a maintenance/quality control-focused update. After that, further
+      development will be done on:
+    </p>
+    <ul>
+      <li>More automated database tests</li>
+      <li>
+        Customized and more comprehensive database views for different tasks
+        (scheduling, travel planning etc.)
+      </li>
+      <li>??? -> Let me know what you would like to see! :></li>
+    </ul>
+  </div>
+  {% endblock sidebar %}
+</div>

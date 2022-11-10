@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block description %}
+
+The messages in the log are shown in reverse chronological order and color-coded
+according to their severity. Purely informational messages 
+(usually a good thing ;>) will show up in white, <span class="text-warning">
+  warnings</span> and <span class="text-danger">errors</span> are highlighted.
+{% endblock description %}
+
+{% block content %}
+
+<div class="container" id="results">
+<ul class="list-group">
+    
+{% for e in contents %}
+  {% if e.category == 'CRITICAL' %}
+    <li class="list-group-item list-group-item-danger">
+  {% elif e.category == 'ERROR' %}
+    <li class="list-group-item list-group-item-danger">
+  {% elif e.category == 'WARNING' %}
+    <li class="list-group-item list-group-item-warning">
+  {% else %}
+    <li class="list-group-item">
+  {% endif %}
+  ({{ e.module }}){{ e.message }} <small class="text-muted">{{ e.time.split(',')[0] }}</small>
+
+  </li>
+{% endfor %}
+</div>
+{% endblock content %}
+
+{% block sidebar %}
+
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>✅ Tips and tricks </h3>
+    <p class='text-muted'>
+    You can help make sure this site is running smoothly:
+    </p>
+    <ul>
+      <li>Avoid creating empty pages in databases, and delete them when you come across one.</li>
+      <li>Update all internal databases regularly, and especially after having made changes to "Config" databases.</li>
+      <li>Do not paste <em>formatted</em> text into the databases.</li>
+      <li>Use the database analyzer to identify potential issues and fix them.</li>
+      <li>Read the insctructions :></li>
+    </ul>
+  </div>
+
+{% endblock sidebar %}

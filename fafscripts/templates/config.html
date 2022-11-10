@@ -1,0 +1,110 @@
+{% extends "layout.html" %} {% block description %} While the
+<em>contents</em> of the festival's Notion databases are retrieved directly from
+Notion and thus always up-to-date when scripts are run, various locally-stored
+databases speed up the site dramatically, e.g. by 'remembering' certain settings
+and matching Notion ids to their respective page titles and vice versa. In
+certain cases, these databases may have to be updated manually to ensure smooth
+operations. This is especially important to remember when/if changes have been
+made to the settings on the
+<a
+  href="https://www.notion.so/Config-e94924f765f943b4bbfceaa53ea092a0"
+  target="_blank"
+>
+  'Config'</a
+>
+page found on Notion. {% endblock description %} {% block content %}
+<div class="content-section col-12">
+  <h4>Click a button to update the corresponding internal database:</h4>
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='CatalogueCategoryChoice') }}"
+    >Catalogue categories</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='DatabaseID') }}"
+    >Database IDs</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='Event') }}"
+    >Events</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='EventCategory') }}"
+    >Event categories</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='EventiveTag') }}"
+    >Eventive tags</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='Film') }}"
+    >Films</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='FilmProgramme') }}"
+    >Film programmes</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='GeoblockOption') }}"
+    >Geoblock options</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='Guest') }}"
+    >Guests</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='GuestCategoryChoice') }}"
+    >Guest categories</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='PassBucket') }}"
+    >Pass buckets</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='ReimbursementsChoice') }}"
+    >Reimbursement options</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='Room') }}"
+    >Room types</a
+  >
+  <a
+    class="btn btn-sm"
+    href="{{ url_for('main.rebuild_model', model_name='Venue') }}"
+    >Venues</a
+  >
+</div>
+
+<div class="content-section col-12">
+  <h4>Other config scripts:</h4>
+  <a class="btn btn-sm" href="{{ url_for('scripts.update_pass_templates') }}"
+    >Update pass templates</a
+  >
+</div>
+{% endblock content %} {% block sidebar %}
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>💢 Found an issue?</h3>
+    <p class="text-muted">
+      Let me know about problems, errors or features you would like to see on
+      <a
+        href="https://www.notion.so/b2d8f5426c66482fa22d24ba8b0168ba?v=d14c7e63ffc34ad5acf06bfd14a0e3ff"
+      >
+        Notion.</a
+      >
+    </p>
+  </div>
+  {% endblock sidebar %}
+</div>

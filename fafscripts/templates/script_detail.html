@@ -1,0 +1,73 @@
+{% include 'layout.html' %}
+
+<div class="container">
+  <p class="lead">{% block description %}{% endblock description %}</p>
+</div>
+
+<div class="container">
+  <h2>Controls</h2>
+  {% block options %}{% endblock options %}
+</div>
+
+{% if results %}
+<div class="container" id="results">
+  <h2>Results</h2>
+  <div class="list-group">
+    {% for error in results.errors %}
+    <a
+      href="{{ error.url }}"
+      target="_blank"
+      class="list-group-item list-group-item-action list-group-item-danger"
+      >{{ error.message }}</a
+    >
+    {% endfor %} {% for warning in results.warnings %}
+    <a
+      href="{{ warning.url }}"
+      target="_blank"
+      class="list-group-item list-group-item-action list-group-item-warning"
+      >{{ warning.message }}</a
+    >
+    {% endfor %} {% for message in results.messages %}
+    <a
+      href="{{ message.url }}"
+      target="_blank"
+      class="list-group-item list-group-item-action list-group-item-secondary"
+      >{{ message.message }}</a
+    >
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="container">
+  <div
+    class="spinner-border text-success"
+    role="status"
+    id="spinner"
+    style="display: none"
+  >
+    <span class="sr-only"></span>
+  </div>
+</div>
+
+{% block javascript %}
+<script type="text/javascript">
+  var runButton = document.querySelector(".btn-success");
+  var spinner = document.getElementById("spinner");
+  var results = document.getElementById("results");
+
+  function registerButtonHandlers(e) {
+    runButton.addEventListener("click", runButtonClicked);
+  }
+
+  if (document.readyState == "loading")
+    document.addEventListener("DOMContentLoaded", registerButtonHandlers);
+  else registerButtonHandlers();
+
+  function runButtonClicked() {
+    runButton.style.display = "none";
+    spinner.style.display = "block";
+    results.style.display = "none";
+  }
+</script>
+{% endblock javascript %}

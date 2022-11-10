@@ -1,0 +1,13 @@
+{% extends 'script_detail.html' %} {% block description %} This script checks
+the chosen database for common issues such as wrong formatting, important
+omissions and various other problems. Clicking on a message will take you
+straight to the respective notion page. Please note that this is still in
+development and thus incomplete: If you can think of any checks/tests that
+should be added, please let me know! :> {% endblock description %} {% block
+options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.db.label(class="form-label") }} {{
+  form.db(class="form-select") }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

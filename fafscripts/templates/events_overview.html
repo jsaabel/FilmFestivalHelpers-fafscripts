@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block description %}
+
+Pick an event to see the information that is stored
+on Notion, find out about potential issues, execute scripts and more. 
+Should you not find the event you are looking for, you can update the list of
+<a href="{{ url_for('main.rebuild_model', model_name='Event') }}">events</a>,
+<a href="{{ url_for('main.rebuild_model', model_name='EventCategory') }}">event categories</a>
+and/or 
+<a href="{{ url_for('main.rebuild_model', model_name='Venue') }}">venues</a>.
+
+{% endblock description %}
+
+
+{% block content %}
+
+<div class="row">
+<div class="content-section col-12">
+  <h4>Jump to category:</h4>
+  {% for category in categories %}
+  <a class="btn btn-sm" href="{{ url_for('dbviews.events_overview')}}#{{ category.name }}" class="text-muted"> {{ category.name }}</a>
+  {% endfor %}
+</div>
+</div>
+
+<div>
+{% for category in categories %}
+  {% if not loop.index % 2 == 0 %}
+  <div class="row">
+  {% endif %}
+
+  <div class="content-section col-md-6" id="{{ category.name }}">
+  <h4>{{ category.name }}<h4>
+      {% for event in events%}
+      {% if category.name in event.category %}
+      <a href="{{ url_for('dbviews.event_view', notion_id=event.notion_id)}}" class="fs-6 text">{{ event.name }}</a><br>
+      {% endif %}
+      {% endfor %}
+  </div>
+  {% if loop.index % 2 == 0 or loop.last %}
+  </div>
+  {% endif %}
+{% endfor %}
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>💢 Found an issue?</h3>
+    <p class='text-muted'>Let me know about problems, errors or features you would like to see on
+    <a href="https://www.notion.so/b2d8f5426c66482fa22d24ba8b0168ba?v=d14c7e63ffc34ad5acf06bfd14a0e3ff">
+      Notion.</a>
+    </p>
+  </div>
+</div>
+{% endblock sidebar %}

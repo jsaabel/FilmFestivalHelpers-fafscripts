@@ -1,0 +1,299 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="row">
+  <h1>🤖 Scripts</h1>
+  <p class="lead">
+    Hi {{ current_user.username.title() }}! These are the scripts that you can
+    run from this site. Exported files are uploaded to Dropbox and can be found
+    in the <em>00 fafscripts</em> folder. Note that some of these scripts
+    involve a lot of down-/upload processes, and can take a couple of minutes to
+    finish.
+  </p>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🤖 Database Analyzer</h5>
+        <p class="card-text">Check databases for common mistakes and issues.</p>
+        <a
+          href="{{ url_for('scripts.db_analyzer') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">📙 Catalogue export</h5>
+        <p class="card-text">Export catalog files to Dropbox.</p>
+        <a
+          href="{{ url_for('scripts.catalogue_export') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🖼️ Still image export</h5>
+        <p class="card-text">
+          Generate still image folders and/or data merge files.
+        </p>
+        <a
+          href="{{ url_for('scripts.img_export') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🎨 ID merge files</h5>
+        <p class="card-text">
+          Generate text files used in InDesign data merge.
+        </p>
+        <a
+          href="{{ url_for('scripts.id_merge_export') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🎞️ Film list export</h5>
+        <p class="card-text">Generate formatted film lists.</p>
+        <a
+          href="{{ url_for('scripts.film_list_export') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🏃 Schedule export</h5>
+        <p class="card-text">Generate personal schedules.</p>
+        <a
+          href="{{ url_for('scripts.schedule_export') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🏨 Hotel list export</h5>
+        <p class="card-text">Hotel list/spreadsheet and stats.</p>
+        <a
+          href="{{ url_for('scripts.hotel_list') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">📅 Notion to Google Calendar</h5>
+        <p class="card-text">
+          Copy a calendar event to your personal calendar.
+        </p>
+        <a
+          href="{{ url_for('scripts.gcal_script') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">💸 Reimbursements</h5>
+        <p class="card-text">Generate an overview of your reimbursements.</p>
+        <a
+          href="{{ url_for('scripts.reimbursements') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🛂 Pass export (single)</h5>
+        <p class="card-text">For printing individual passes.</p>
+        <a
+          href="{{ url_for('scripts.pass_maker') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🛂 Pass export (batch)</h5>
+        <p class="card-text">For batch printing passes.</p>
+        <a
+          href="{{ url_for('scripts.pass_export_batch_route') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">📈 Stats update</h5>
+        <p class="card-text">Get the latest statistics.</p>
+        <a
+          href="{{ url_for('scripts.stats_update') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row mt-4">
+  <h1>🧪Experimental scripts</h1>
+  <p class="lead">
+  The following scripts are considered experimental and/or not yet properly tested, 
+  so don't be suprised if they crash or don't work as expected :>
+  </p>
+</div>
+ -->
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">👾 Make virtual screening (film programme)</h5>
+        <p class="card-text">
+          Meant to provide a starting point for a virtual film programme.
+        </p>
+        <a
+          href="{{ url_for('scripts.make_virtual_screening_script') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🖨️ Norwegian html</h5>
+        <p class="card-text">
+          Generates word documents for easier copy-and-paste when adding
+          Norwegian translations to WordPress.
+        </p>
+        <a
+          href="{{ url_for('scripts.norwegian_html_export') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🏃 Volunteer schedule export</h5>
+        <p class="card-text">Generate volunteer schedules.</p>
+        <a
+          href="{{ url_for('scripts.volunteer_schedules_script') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">🎙️ Tech sheet export</h5>
+        <p class="card-text">Generate tech sheets.</p>
+        <a
+          href="{{ url_for('scripts.export_tech_sheets') }}"
+          class="btn btn-outline-success"
+          >Go to script</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %} {% block sidebar %}
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>🔍 Database explorer</h3>
+    <p class="text-muted">
+      If you're looking to work on or with a specific database entry, you can
+      find it here:
+    </p>
+    <div class="list-group">
+      <a
+        href="{{ url_for('dbviews.films_overview') }}"
+        class="list-group-item list-group-item-action list-group-item-success"
+        ><i class="bi-film"></i> Films overview</a
+      >
+      <a
+        href="{{ url_for('dbviews.guests_overview') }}"
+        class="list-group-item list-group-item-action list-group-item-success"
+        ><i class="bi-people"></i> Guests overview</a
+      >
+      <a
+        href="{{ url_for('dbviews.events_overview') }}"
+        class="list-group-item list-group-item-action list-group-item-success"
+        ><i class="bi-calendar-event"></i> Events overview</a
+      >
+    </div>
+  </div>
+  {% endblock sidebar %}
+</div>

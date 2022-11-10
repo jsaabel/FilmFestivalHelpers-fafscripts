@@ -1,0 +1,15 @@
+{% extends 'script_detail.html' %} {% block description %} Simply paste a url
+from the Notion calendar here. The script will generate a link that lets you add
+the event to your personal Google Calendar. {% endblock description %} {% block
+options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.link.label(class="form-label") }} {{
+  form.link(class="form-control") }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% if gcal_link %}
+  <div id="results">
+    <h2>Results</h2>
+    <a href="{{ gcal_link }}" target="_blank">Click me!</a>
+  </div>
+  {% endif %} {% endblock options %}
+</form>

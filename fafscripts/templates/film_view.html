@@ -1,0 +1,206 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="btn-group">
+    <button type="button" class="btn btn-success" id="cat-button"><i class="bi-book"></i> Catalogue</button>
+    <!-- <button type="button" class="btn btn-success" id="log-button"><i class="bi-hdd"></i> Logistics</button> -->
+    </div>
+
+  </div>
+
+  <div class="content-section" id="cat-details" style="display:block">
+
+    <div class="row">
+      <div class="col-md12">
+      {% for programme in film_data.programmes.split(',') %}
+      <a href="{{ url_for('dbviews.films_overview')}}#{{ programme.strip() }}" class="text-muted"> {{ programme }}</a>
+      {% endfor %}
+      </div>
+    </div>
+
+    {% if film_data.get('original-title') %}
+    <h2>🎞️ {{ film_data.get('english-title') }} / {{ film_data.get('original-title') }}</h2>
+    {% else %}
+      <h2>🎞️ {{ film_data.get('english-title') }}</h2>
+    {% endif %}
+
+    <div class="row">
+      <p class="text-muted"> {{film_data.director}}. {{ film_data.country }}, {{ film_data.year }}. Runtime: {{ film_data.runtime }}.</p>
+    </div>
+
+    <div class="row">
+      {% if film_data.synopsis %}
+        <small class="text-muted"> Synopsis ({{ film_data.synopsis | length }} characters):</small>
+        <p>{{ film_data.synopsis | safe }}</p>
+      {% else %}
+        <p class="text-danger"> (SYNOPSIS MISSING) </p>
+      {% endif %}
+    </div>
+
+    <div class="row">
+      {% if film_data.bio %}
+        <small class="text-muted"> Director's bio ({{ film_data.bio | length }} characters):</small>
+        {{ film_data.bio | safe }}
+      {% else %}
+        <p class="text-danger"> (BIO MISSING) </p>
+      {% endif %}
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-12">
+        <small class="text-muted">Technique: </small>
+          {% if film_data.technique %}
+            {{ film_data.technique }}
+          {% else %}
+            <input class="form-control-plaintext text-danger" value="(TECHNIQUE MISSING)">
+          {% endif %}
+      </div>
+
+    </div>
+
+    {% if film_data.production %}
+    <div class=row>
+      <div class="col-md-12">
+        <small class="text-muted">Production: </small>
+          {{ film_data.production }}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if film_data.school %}
+    <div class=row>
+      <div class="col-md-12">
+        <small class="text-muted">School: </small>
+          {{ film_data.school }}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if film_data.animation %}
+    <div class="row">
+
+      <div class="col-md-12">
+        <small class="text-muted">Animation: </small>
+            {{ film_data.animation }}
+      </div>
+
+    </div>
+    {% endif %}
+
+  </div>
+
+  <div class="content-section" id="issues" style="display:none">
+
+    <h2>⚠️ Potential issues with this database entry</h2>
+    <div class="list-group">
+    {% for error in issues.errors %}
+    <a href="{{ error.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-danger">{{ error.message }}</a>
+    {% endfor %}
+    {% for warning in issues.warnings %}
+      <a href="{{ warning.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-warning">{{ warning.message }}</a>
+    {% endfor %}
+    {% for message in issues.messages %}
+      <a href="{{ message.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-secondary">{{ message.message }}</a>
+    {% endfor %}
+    </div>
+
+  </div>
+
+</div>
+
+
+
+{% endblock content %}
+
+{% block sidebar %}
+
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>🤖 Scripts and links</h3>
+    <p class='text-muted'>Execute scripts or visit related links:
+      <div class="list-group">
+        {% if issue_count > 0 %}
+          <a href="#" class="list-group-item list-group-item-action list-group-item-warning" id="issues-button"><i class="bi-exclamation-triangle"></i> Show/hide {{ issue_count }} potential issue(s)</a>
+        {% else %}
+          <a href="#" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-hand-thumbs-up"></i> No issues found :)</a>
+        {% endif %}
+        <a href="{{ film_data.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-pencil"></i> View/edit on Notion</a>
+        {% if film_data.get('filmfreeway-link') %}
+          <a href="{{ film_data.get('filmfreeway-link') }}" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-film"></i> View on FilmFreeway</a>
+        {% endif %}
+        {% if film_data.get('eventive-link') %}
+        <a href="{{ film_data.get('eventive-link') }}" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-camera-reels"></i> View/edit on Eventive</a>
+        <a href="{{ url_for('scripts.film_to_eventive', notion_id=film_data.id) }}" class="list-group-item list-group-item-action list-group-item-warning" id="eventive-button"><i class="bi-arrow-repeat"></i> Update Eventive</a>
+        {% elif error_count == 0 %}
+        <a href="{{ url_for('scripts.film_to_eventive', notion_id=film_data.id) }}" class="list-group-item list-group-item-action list-group-item-warning" id="eventive-button"><i class="bi-cloud-arrow-up"></i> Push to Eventive</a>
+        {% endif %}
+        {% if film_data.pic %}
+        <a href="{{ film_data.pic }}" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-image"></i> Check still image</a>
+        {% endif %}
+        {% if film_data.get('trailer-url') %}
+        <a href="{{ film_data.get('trailer-url') }}" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-youtube"></i> Watch trailer</a>
+        {% endif %}
+        <a href="{{ url_for('dbviews.films_overview') }}" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-arrow-left"></i> Back to overview</a>
+      </div>
+    </p>
+  </div>
+</div>
+
+{% endblock sidebar %}
+
+{% block javascript %}
+
+<script type="text/javascript">
+
+var catButton = document.getElementById("cat-button");
+var catDetails = document.getElementById("cat-details");
+var eventiveButton = document.getElementById("eventive-button");
+var issuesButton = document.getElementById("issues-button");
+var issues = document.getElementById("issues");
+
+function registerButtonHandlers(e) {
+    if(catButton != null){
+      catButton.addEventListener("click", catButtonClicked);
+    }
+    if(issuesButton != null){
+      issuesButton.addEventListener("click", issuesButtonClicked);
+    }
+    if(eventiveButton != null){
+      eventiveButton.addEventListener("click", eventiveButtonClicked);
+    }
+}
+
+if (document.readyState == "loading")
+    document.addEventListener('DOMContentLoaded', registerButtonHandlers);
+else
+    registerButtonHandlers();
+
+
+function catButtonClicked(){
+    catDetails.style.display = "block";
+    logDetails.style.display = "none";
+}
+
+
+function eventiveButtonClicked(){
+    eventiveButton.innerHTML = "Pushing to eventive...";
+}
+
+
+function issuesButtonClicked(){
+    if (issues.style.display === "none") {
+        issues.style.display = "block";
+    } else {
+      issues.style.display = "none";
+    }
+}
+
+</script>
+{% endblock javascript %}
+

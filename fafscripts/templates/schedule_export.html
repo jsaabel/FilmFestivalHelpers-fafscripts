@@ -1,0 +1,50 @@
+{% extends 'script_detail.html' %} {% block description %} Based on the events
+that are associated with the chosen guest in notion, this script generates a
+formatted schedule for the guest and uploads it to Dropbox. If necessary, the
+list of guests to choose from can be
+<a href="{{ url_for('main.rebuild_model', model_name='Guest') }}"> updated </a>.
+You can also choose to export all schedules,
+<del>and/or convert the word files to pdf.</del> NB: A common reason for this
+script not working is that Events have not been assigned an (exact) time or
+venue on Notion! {% endblock description %} {% block options %}
+<div class="container">Choose a guest:</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"
+></script>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css"
+  rel="stylesheet"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+
+<div class="container">
+  <div class="form-group">
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div style="width: 400px">{{ form.name }}</div>
+      <br />
+      {{ form.all.label(class="form-check-label") }} {{
+      form.all(class="form-check-input") }}
+      <br />
+      {{ form.pdf.label(class="form-check-label") }} {{
+      form.pdf(class="form-check-input") }}
+      <br />
+      <button class="btn btn-success">Go</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $("#name").select2({
+      // init Select2 on form's name field
+      placeholder: "{{ form.name.label.text }}",
+      allowClear: true,
+      width: "style",
+    });
+  });
+</script>
+{% endblock options %} {% block go_button %} Go {% endblock go_button %}

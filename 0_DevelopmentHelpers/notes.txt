@@ -1,7 +1,0 @@
-# 19.11.2021
-A (more) elegant way to deal with errors preventing scripts from running uninterupted:
-Perform a check if all necessary conditions are met (mostly: check for missing data), and skip entry if this check fails.
-Then, add identifier/title to a list that is printed/saved after execution, ideally w/ reason for 'failure'.
--> More robust scripts, less exception handling necessary on 'lower' levels
--> build test case w/ missing data to obtain correct exception types
--> write test as function to not clutter script

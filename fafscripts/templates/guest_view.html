@@ -1,0 +1,183 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="btn-group">
+    <button type="button" class="btn btn-success" id="cat-button"><i class="bi-info"></i> Info</button>
+    <!-- <button type="button" class="btn btn-success" id="log-button"><i class="bi-hdd"></i> Logistics</button> -->
+    </div>
+
+  </div>
+
+  <div class="content-section" id="info" style="display:block">
+
+    <div class="row">
+
+      <div class="col-md12">
+      <a href="{{ url_for('dbviews.guests_overview')}}#{{ guest_data.get('guest-category') }}" class="text-muted"> {{ guest_data.get('guest-category') }}</a>
+      <span class="text-muted">({{ guest_data.status }})</span>
+      {% if guest_data.get('pass-id') %}
+      <span class="text-muted">(🎟️)</span>
+      {% endif %}
+      </div>
+
+    </div>
+
+
+    <div class="row">
+    <h2>{{ guest_data.name }}</h2>
+
+      {% if bio %}
+        <small class="text-muted">Bio ({{ bio | length }} characters):</small>
+        {{ bio | safe }}
+      {% else %}
+        <p class="text-warning"> (NO BIO) </p>
+      {% endif %}
+
+      {% if events_functionary %}
+        <small class="text-muted">Events (Functionary)</small>
+        {% for event in events_functionary %}
+        <a href="{{ url_for('dbviews.event_view', notion_id=event.notion_id) }}" class='text-muted'>{{ event.name }}</a>
+        {% endfor %}
+      {% endif %}
+
+      {% if events_attendee %}
+        <small class="text-muted">Events (Attendee)</small>
+        {% for event in events_attendee %}
+        <a href="{{ url_for('dbviews.event_view', notion_id=event.notion_id) }}" class='text-muted'>{{ event. name }}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="content-section" id="issues" style="display:none">
+
+      <h2>⚠️ Potential issues with this database entry</h2>
+      <div class="list-group">
+      {% for error in issues.errors %}
+      <a href="{{ error.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-danger">{{ error.message }}</a>
+      {% endfor %}
+      {% for warning in issues.warnings %}
+        <a href="{{ warning.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-warning">{{ warning.message }}</a>
+      {% endfor %}
+      {% for message in issues.messages %}
+        <a href="{{ message.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-secondary">{{ message.message }}</a>
+      {% endfor %}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>🤖 Scripts and links</h3>
+    <p class='text-muted'>Execute scripts or visit related links:
+      <div class="list-group">
+        {% if issue_count > 0 %}
+          <a href="#" class="list-group-item list-group-item-action list-group-item-warning" id="issues-button"><i class="bi-exclamation-triangle"></i> Show/hide {{ issue_count }} potential issue(s)</a>
+        {% else %}
+          <a href="#" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-hand-thumbs-up"></i> No issues found :)</a>
+        {% endif %}
+        <a href="{{ guest_data.url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-pencil"></i> View/edit on Notion</a>
+        {% if guest_data.get('e-mail') %}
+          <a href="mailto:{{ guest_data.get('e-mail') }}" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-envelope"></i> Send e-mail</a>
+        {% endif %}
+        {% if guest_data.get('e-mail') and not guest_data.get('pass-id')%}
+          <a href="{{ url_for('scripts.issue_pass', email=guest_data.get('e-mail'), name=guest_data.name, guest_id=guest_data.id)}}" id="pass-button" class="list-group-item list-group-item-action list-group-item-warning"><i class="bi-pass"></i> Issue pass</a>
+        {% endif %}
+        {% if events_attendee or guest_data.get('events-functionaries') %}
+          <a href="{{ url_for('dbviews.schedule_preview', notion_id=guest_data.id) }}" id="preview-button" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-zoom-in"></i> Preview schedule</a>
+          <a href="{{ url_for('scripts.schedule_export_with_id', notion_id=guest_data.id) }}" id="export-button" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-robot"></i> Export schedule</a>
+        {% endif %}
+
+        {% if not guest_data.get('wordpress')%}
+        <a href="{{ url_for('scripts.guest_to_wordpress', notion_id=guest_data.id) }}" id="wordpress-button" class="list-group-item list-group-item-action list-group-item-warning"><i class="bi-wordpress"></i> Push to WordPress</a>
+        {% else %}
+        <a href="{{ guest_data.get('wordpress') }}" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-wordpress"></i> View/edit on WordPress</a>
+        {% endif %}
+        <a href="{{ url_for('dbviews.guests_overview') }}" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-arrow-left"></i> Back to overview</a>
+      </div>
+    </p>
+  </div>
+</div>
+
+{% endblock sidebar %}
+
+{% block javascript %}
+
+<script type="text/javascript">
+
+var exportButton = document.getElementById("export-button");
+var issuesButton = document.getElementById("issues-button");
+var issues = document.getElementById("issues");
+var passButton = document.getElementById("pass-button");
+var wordpressButton = document.getElementById("wordpress-button");
+var alertMessage = document.querySelector(".alert");
+var previewButton = document.getElementById("preview-button");
+
+function registerButtonHandlers(e) {
+    if(wordpressButton != null){
+      wordpressButton.addEventListener("click", wordpressButtonClicked);
+    }
+    if(exportButton != null){
+      exportButton.addEventListener("click", exportButtonClicked);
+    }
+    if(issuesButton != null){
+      issuesButton.addEventListener("click", issuesButtonClicked);
+    }
+    if(passButton != null){
+      passButton.addEventListener("click", passButtonClicked);
+    }
+    if(previewButton != null){
+      previewButton.addEventListener("click", previewButtonClicked);
+    }
+}
+
+if (document.readyState == "loading")
+    document.addEventListener('DOMContentLoaded', registerButtonHandlers);
+else
+    registerButtonHandlers();
+
+function exportButtonClicked(){
+    exportButton.classList.replace("list-group-item-success", "list-group-item-warning");
+    exportButton.innerHTML = "Script running...";
+    alertMessage.style.display = "none";
+}
+
+function passButtonClicked(){
+    passButton.classList.replace("list-group-item-success", "list-group-item-warning");
+    passButton.innerHTML = "Script running...";
+    alertMessage.style.display = "none";
+}
+
+function previewButtonClicked(){
+    previewButton.classList.replace("list-group-item-success", "list-group-item-warning");
+    previewButton.innerHTML = "Generating preview...";
+    alertMessage.style.display = "none";
+}
+
+function issuesButtonClicked(){
+    if (issues.style.display === "none") {
+        issues.style.display = "block";
+    } else {
+      issues.style.display = "none";
+    }
+}
+
+function wordpressButtonClicked(){
+    wordpressButton.innerHTML = "Script running...";
+}
+
+</script>
+{% endblock javascript %}
+

@@ -1,0 +1,18 @@
+{% extends 'script_detail.html' %} {% block description %} This script generates
+a nicely formatted list of films in the chosen programme, and uploads it to
+Dropbox. You can also choose to export the list in <em>Norwegian mode</em>,
+which will automatically translate the most common country names to Norwegian.
+The list of available programmes can be
+<a href="{{ url_for('main.rebuild_model', model_name='FilmProgramme') }}">
+  updated
+</a>
+if needed. {% endblock description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.programme.label(class="form-label") }} {{
+  form.programme(class="form-select") }}
+  <br />
+  {{ form.norwegian_mode.label(class="form-check-label") }} {{
+  form.norwegian_mode(class="form-check-input") }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

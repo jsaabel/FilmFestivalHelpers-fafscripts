@@ -1,0 +1,17 @@
+{% extends 'script_detail.html' %} {% block description %} This script generates
+a number of relevant statistics from various Notion and Eventive databases, and
+uploads the result to the
+<a
+  href="https://www.notion.so/65eeb98395a64ff3ba868822afb453c1?v=c2017c531e084390b1f96474d44e2d82"
+  ,
+  target="_blank"
+>
+  'Stats' page on Notion</a
+>. Each time you execute this script, a new line with the latest stats and the
+current time is added to the table, making it easy to track progress over time.
+{% endblock description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

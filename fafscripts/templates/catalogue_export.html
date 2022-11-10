@@ -1,0 +1,32 @@
+{% extends 'script_detail.html' %} {% block description %} This script generates
+correctly named and formatted text and image files for the catalogue and uploads
+them to Dropbox. Since this usually takes several minutes to complete,
+categories to be exported can (and probably should) be chosen individually. Use
+the control/shift key to select multiple categories at the same time. If the
+form under controls is empty or out of sync with notion, you can
+<a
+  href="{{ url_for('main.rebuild_model', 
+    model_name='CatalogueCategoryChoice') }}"
+>
+  rebuild
+</a>
+the form before executing the script. The same applies for the list of film
+programmes, which can be updated under 'Config'. {% endblock description %} {%
+block options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.categories.label(class="form-label") }}
+  <br />
+  {{ form.categories(size=10, multiple=True, class="form-select") }}
+  <br />
+  {{ form.programmes.label(class="form-label") }}
+  <br />
+  {{ form.programmes(size=10, multiple=True, class="form-select") }}
+  <br />
+  {{ form.text.label(class="form-label") }} {{ form.text }} {{
+  form.img.label(class="form-label") }} {{ form.img }}
+  <br />
+  {{ form.submit(class="btn btn-success") }}
+  <br />
+</form>
+
+{% endblock options %}

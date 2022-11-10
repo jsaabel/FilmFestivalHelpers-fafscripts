@@ -1,0 +1,29 @@
+{% extends 'script_detail.html' %}
+{% block description %}
+This is the batch version of the
+<a href={{ url_for("scripts.pass_maker") }}>pass maker</a> script.
+Use ctrl/shift to select multiple pass buckets (NB: trying to export digital passes will throw an error). 
+You can also choose
+how files are named, and/or to only export passes that have been created/updated within
+a certain time frame. This should make it easy to find the file(s) you are looking for.
+If changes were made to the configuration, you might want to update the "Pass buckets" internal database and/or click the 
+"Update pass templates" button under 
+<a href={{ url_for("main.config")}}>Config</a>. If the script finishes but returns an error message for one or more passes, you can click 
+that error message to view  the pass(es) in 
+question on Eventive, and can make sure that both the pass itself and the associated customer/guest have a name set before giving it another try.
+{% endblock description %}
+{% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }}
+  {{ form.pass_buckets.label(class="form-label") }}
+  {{ form.pass_buckets(size=10, multiple=True, class="form-select") }}
+  <br>
+  {{ form.sort.label(class="form-label") }}
+  {{ form. sort }}
+  <br>
+  {{ form.day_diff.label(class="form-label") }}
+  {{ form.day_diff }}
+  <br>
+  {{ form.submit(class="btn btn-success") }}
+{% endblock options %}
+

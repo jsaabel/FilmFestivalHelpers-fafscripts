@@ -1,0 +1,17 @@
+{% extends 'script_detail.html' %} {% block description %} This script generates
+a formatted schedule of tasks for each volunteer and uploads it to Dropbox. Like
+the
+<a href="{{ url_for('scripts.schedule_export') }}">guest schedule script</a>,
+this script relies on the
+<a href="{{ url_for('main.rebuild_model', model_name='Guest') }}">Guests</a>,
+<a href="{{ url_for('main.rebuild_model', model_name='Venue') }}">Venues</a>
+and
+<a href="{{ url_for('main.rebuild_model', model_name='Event') }}">Events</a>
+databases to be up to date, and each Volunteer being assigned a guest category
+on Notion. Tasks that do not have a time set will be skipped. {% endblock
+description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

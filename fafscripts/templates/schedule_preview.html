@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block description %}
+This simplified preview is a convenvient way to check a guest's schedule
+without having to export it first. If you don't like what 
+you're seeing,
+you should edit the respective guest and/or event(s) on notion before reloading
+this page. Once you're satisfied, you can generate a nicely
+formatted file using the script button in the sidebar.
+{% endblock description %}
+
+{% block content %}
+
+<div class="content-section">
+
+  {{ html | safe }}
+
+</div>
+{% endblock content %}
+
+{% block sidebar %}
+
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>🤖 Scripts and links</h3>
+    <p class='text-muted'>Execute scripts or visit related links:
+      <div class="list-group">
+        <a href="{{ notion_url }}" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-pencil"></i> View/edit on notion</a>
+        <a href="{{ url_for('dbviews.schedule_preview', notion_id=notion_id) }}" id="reload-button" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-arrow-clockwise"></i> Reload this page</a>
+        <a href="{{ url_for('scripts.schedule_export_with_id', notion_id=notion_id) }}" id="export-button" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-cloud-download"></i> Save schedule</a>
+        <a href="{{ url_for('dbviews.guests_overview') }}" class="list-group-item list-group-item-action list-group-item-success"><i class="bi-arrow-left"></i> Back to overview</a>
+      </div>
+    </p>
+  </div>
+</div>
+
+{% endblock sidebar %}
+
+{% block javascript %}
+<script type="text/javascript">
+
+    const exportButton = document.getElementById("export-button");
+    const reloadButton = document.getElementById("reload-button");
+    const alertMessage = document.querySelector(".alert");
+    exportButton.addEventListener("click", function(){ buttonClicked(exportButton)});
+    reloadButton.addEventListener("click", function(){ buttonClicked(reloadButton)});
+
+    function buttonClicked(b){
+        b.classList.replace("list-group-item-success", "list-group-item-warning");
+        b.innerHTML = "Script running...";
+        alertMessage.style.display = "none";
+    }
+
+</script>
+{% endblock javascript %}
+

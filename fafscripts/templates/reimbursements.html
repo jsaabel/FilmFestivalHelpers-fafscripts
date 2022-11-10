@@ -1,0 +1,42 @@
+{% extends 'script_detail.html' %}
+{% block description %}
+This script creates a handy overview of all your expenses/receipts in the form 
+of an excel spreadsheet. Foreign currencies (euro/usd) are automatically converted
+to NOK using the current exchange rate. The file will be uploaded to Dropbox, and all 
+you should have
+to do before turning it in is to manually adjust the column size. You can also choose to
+export all your receipts. They will be ordered chronologically and given an
+appropriate file name. If you don't find your name under Controls, you can
+<a href="{{ url_for('main.rebuild_model', model_name='ReimbursementsChoice') }}">
+    rebuild </a> the form before executing the script.
+</form>
+{% endblock description %}
+{% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }}
+  {{ form.name.label(class="form-label") }}
+  <br>
+  {{ form.name(class="form-select") }}
+  <br>
+  {{ form.address.label(class="form-label") }}
+  <br>
+  {{ form.address(class="form-control") }}
+  <small class="form-text text-muted">Use three lines and start with your full name.</small>
+  <br>
+  {{ form.account_number.label(class="form-label") }}
+  <br>
+  {{ form.account_number(class="form-control") }}
+  <br>
+  {{ form.id_number.label(class="form-label") }}
+  <br>
+  {{ form.id_number(class="form-control") }}
+  <br>
+  {{ form.export_files.label(class="form-check-label") }}
+  {{ form.export_files(class="form-check-input") }}
+  <br>
+  {{ form.submit(class="btn btn-success") }}
+  <br>
+</form>
+
+
+{% endblock options %}

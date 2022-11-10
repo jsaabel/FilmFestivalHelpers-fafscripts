@@ -1,0 +1,17 @@
+{% extends 'script_detail.html' %} {% block description %} This script downloads
+film images from the URLs provided in the database, gives them the correct name
+(including sequence) and uploads them to Dropbox. These images can then be used
+for various purposes, including for batch applications in
+<a href="{{ url_for('scripts.id_merge_export') }}">InDesign</a>. Make sure to
+choose the correct sequence for your use case. The list of available programmes
+can be
+<a href="{{ url_for('main.rebuild_model', model_name='FilmProgramme') }}">
+  updated
+</a>
+if needed. {% endblock description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.programme.label(class="form-label") }} {{
+  form.programme(class="form-select") }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

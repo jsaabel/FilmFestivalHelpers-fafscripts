@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% if title %}
+      <title>FAF-scripts: {{ title }}</title>
+    {% else %}
+      <title>FAF-scripts</title>
+    {% endif %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="icon" href="https://animationfestival.no/2015/media/2020/10/cropped-faf-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="https://animationfestival.no/2015/media/2020/10/cropped-faf-favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://animationfestival.no/2015/media/2020/10/cropped-faf-favicon-180x180.png" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  </head>
+
+  <body>
+
+    <header class="site-header">
+
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel sticky-top">
+
+        <div class="container">
+
+          <a class="navbar-brand mr-4" href="/">FAF-Scripts</a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <ul class="navbar-nav mr-auto">
+            {% if current_user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  DB Explorer
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ url_for('dbviews.films_overview') }}">Films</a>
+                <a class="dropdown-item" href="{{ url_for('dbviews.guests_overview') }}">Guests</a>
+                <a class="dropdown-item" href="{{ url_for('dbviews.events_overview') }}">Events</a>
+              </li>
+              <li class="nav-item"><a class="nav-item nav-link" href="{{ url_for('scripts.scripts_overview') }}">Scripts</a></li>
+              <li class="nav-item"><a class="nav-item nav-link" href="{{ url_for('main.changelog') }}">What's new?</a></li>
+              <li class="nav-item"><a class="nav-item nav-link" href="{{ url_for('main.config') }}">Config</a></li>
+              <li class="nav-item"></li><a class="nav-item nav-link" href="{{ url_for('main.log') }}">Log</a></li>
+            </ul>
+            {% endif %}
+          </div>
+
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+            {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+            {% endif %}
+            </div>
+
+        </div>
+
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+
+
+          {% endwith %}
+          {% if title %}
+          <h1> {{ title }}</h1>
+            <div class="container">
+                <p class="lead">{% block description %}{% endblock description %}</p>
+            </div>
+          {% endif %}
+          {% block content %}{% endblock %}
+        </div>
+        {% block sidebar %}{% endblock %}
+      </div>
+    </main>
+    
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  </body>
+  {% block javascript %}{% endblock %}
+  </html>

@@ -1,0 +1,60 @@
+{% extends "layout.html" %} {% block description %} Pick a film to see the
+information that is stored on Notion, find out about potential issues, execute
+scripts and more. Should you not see the film you are looking for, you can
+update the list of
+<a href="{{ url_for('main.rebuild_model', model_name='Film') }}">films</a>
+and/or
+<a href="{{ url_for('main.rebuild_model', model_name='FilmProgramme') }}"
+  >programmes</a
+>. {% endblock description %} {% block content %}
+
+<div class="row">
+  <div class="content-section col-12">
+    <h4>Jump to programme:</h4>
+    {% for programme in programmes %}
+    <a
+      class="btn btn-sm"
+      href="{{ url_for('dbviews.films_overview')}}#{{ programme.name }}"
+      class="text-muted"
+    >
+      {{ programme.name }}</a
+    >
+    {% endfor %}
+  </div>
+</div>
+
+<div>
+  {% for programme in programmes %} {% if not loop.index % 2 == 0 %}
+  <div class="row">
+    {% endif %}
+
+    <div class="content-section col-md-6" id="{{ programme.name }}">
+      <h4>{{ programme.name }}</h4>
+      {% for film in films%} {% if programme.name in film.programmes %}
+      <a
+        href="{{ url_for('dbviews.film_view', notion_id=film.notion_id)}}"
+        class="fs-6 text"
+        >{{ film.name }}</a
+      ><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% if loop.index % 2 == 0 or loop.last %}
+  </div>
+  {% endif %} {% endfor %}
+</div>
+
+{% endblock content %} {% block sidebar %}
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>💢 Found an issue?</h3>
+    <p class="text-muted">
+      Let me know about problems, errors or features you would like to see on
+      <a
+        href="https://www.notion.so/b2d8f5426c66482fa22d24ba8b0168ba?v=d14c7e63ffc34ad5acf06bfd14a0e3ff"
+      >
+        Notion.</a
+      >
+    </p>
+  </div>
+</div>
+{% endblock sidebar %}

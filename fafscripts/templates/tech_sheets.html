@@ -1,0 +1,16 @@
+{% extends 'script_detail.html' %} {% block description %} Exports a
+chronologically ordered schedule with technical and other
+information/instructions for the chosen venue(s). Things to check if this
+crashes: Do all functionaries have a guest category assigned on Notion? Is the
+"Guests" internal database updated? Do texts in Notion database contain any
+weird formatting, tagged people or similiar? --> Get rid of it. {% endblock
+description %} {% block options %}
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.venues.label(class="form-label") }} {{
+  form.venues(size=10, multiple=True, class="form-select") }}
+  <br />
+  {{ form.combine.label(class="form-check-label") }} {{
+  form.combine(class="form-check-input") }}
+  <br />
+  {{ form.submit(class="btn btn-success") }} {% endblock options %}
+</form>

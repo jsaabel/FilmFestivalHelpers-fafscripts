@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block description %}
+Welcome! This site gives you access to various
+<a href="{{ url_for('scripts.scripts_overview') }}">scripts</a> 
+that let you perform common festival-related tasks in an efficient,
+consistent and time-saving manner. It also acts as an alternative way of 
+exploring and quality-checking the contents of the database.
+{% endblock description %}
+
+{% block content %}
+
+<div class="content-section">
+
+<p>
+Please note that, in spite of my best efforts to make this site and
+the scripts it lets you perform as robust and user-friendly as possible, this is
+my first attempt at a project of this scale and complexity. Bugs can and will occur, 
+the visual presentation is rather basic, and I rely
+on your input to keep improving the user experience. Don't hesitate to let me 
+know about any errors you might encounter, functions and improvements you would 
+like to see 
+or any other feedback you might have! 
+</p>
+
+<p>
+With that being said, the 
+<a href="{{ url_for('scripts.db_analyzer') }}">Database Analyzer script</a>
+is not only intended to spot common mistakes in formatting and such, but will
+also help avoid database errors that can prevent the scripts from performing 
+as expected. If you can think of a check that should be integrated, please 
+let me know.
+</p>
+
+<p>
+The <em>database explorer</em> pulls the most important information about 
+<a href="{{ url_for('dbviews.films_overview') }}">films</a>,
+<a href="{{ url_for('dbviews.guests_overview') }}">guests</a> and
+<a href="{{ url_for('dbviews.events_overview') }}">events</a> 
+from Notion and lets you view the database entries without any disctracting clutter.
+You will also find related links, scripts and other helpful information on the detail pages.
+</p>
+
+<p>
+The 
+<a href="{{ url_for('main.log') }}">log</a> 
+provides some feedback as scripts are executed, and is a good first place to 
+check if something did not go as planned. Additionally, you will find some
+tips and best practices in the sidebar.
+</p>
+
+<p>
+Last but not least, I intend to update this site with fixes, improvements and new features
+regularly. You can check the
+<a href="{{ url_for('main.changelog') }}">What's new?</a> section to keep up with
+the latest developments, and get a sneak peek of what's to come in the sidebar.
+</p>
+
+<p>
+I hope you find value in this newest addition to the FAF toolbox
+and enjoy exploring its features! :>
+
+</div>
+{% endblock content %}
+
+{% block sidebar %}
+<div class="col-md-4">
+  <div class="content-section">
+    <h3>📯 New Version released</h3>
+    <p class='text-muted'>The latest version of FAF-Scripts was released on 
+    Sunday, 16 October. Read up on what's new in the <a href={{ url_for('main.changelog')}}>Changelog</a>.
+    </p>
+  </div>
+</div>
+{% endblock sidebar %}
+
