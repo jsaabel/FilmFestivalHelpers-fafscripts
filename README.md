@@ -1,6 +1,6 @@
 # Project description
 This [Flask](https://flask.palletsprojects.com/en/2.2.x/) app bundles a collection of Python scripts I wrote to help streamline 
-and automate various common tasks for a film festival I have been working with in recent years and makes them available to coworkers without a coding background.
+and automate various common tasks for a film festival I have been working with in recent years and makes them available to coworkers without a coding background. You can see some screenshots from the live site in [this pdf](look_and_feel.pdf).
 
 Besides the time-saving aspect of automating a significant amount of menial 
 and repetetive work, users benefit from 
