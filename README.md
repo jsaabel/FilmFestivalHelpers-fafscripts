@@ -83,7 +83,7 @@ Where appropriate, backlinks to the respective entries on eventive are automatic
 the original database(s), facilitating updates and additional functionality down the road.
 
 ## "Data updates"
-*(Found in the outdated *2021* branch of this repo. Update functionality is included in the newer version references above.)* 
+*(Found in the outdated *2021* branch of this repo. Update functionality is included in the newer version referenced above.)* 
 Scripts used to peform batch updates to all or selected films and events previously pushed to eventive.
 This can include changes to the entries' visibility, their availability for purchase etc.
 
